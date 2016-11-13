@@ -24,21 +24,21 @@ export interface LangChangeEvent {
 export interface MissingTranslationHandlerParams {
     /**
      * the key that's missing in translation files
-     * 
+     *
      * @type {string}
      */
     key: string;
 
     /**
      * an instance of the service that was unable to translate the key.
-     * 
+     *
      * @type {TranslateService}
      */
     translateService: TranslateService;
 
     /**
      * interpolation params that were passed along for translating the given key.
-     * 
+     *
      * @type {Object}
      */
     interpolateParams?: Object;
@@ -52,7 +52,7 @@ declare const window: Window;
 export abstract class MissingTranslationHandler {
     /**
      * A function that handles missing translations.
-     * 
+     *
      * @abstract
      * @param {MissingTranslationHandlerParams} params context for resolving a missing translation
      * @returns {any} a value or an observable
@@ -118,7 +118,7 @@ export class TranslateService {
      * @param missingTranslationHandler A handler for missing translations.
      */
     constructor(
-        public currentLoader: TranslateLoader, 
+        public currentLoader: TranslateLoader,
         private parser: TranslateParser,
         @Optional() private missingTranslationHandler: MissingTranslationHandler
     ) {}
@@ -136,7 +136,7 @@ export class TranslateService {
      * @returns string
      */
     public getDefaultLang(): string {
-        return this.defaultLang;   
+        return this.defaultLang;
     }
 
     /**
@@ -238,8 +238,11 @@ export class TranslateService {
      * @param interpolateParams
      * @returns {any}
      */
-    public getParsedResult(translations: any, key: any, interpolateParams?: Object): any {
+    public getParsedResult(translations: any, key: any, interpolateParams?: any): any {
         let res: string|Observable<string>;
+
+        interpolateParams = interpolateParams || {};
+        interpolateParams['currentLang'] = this.currentLang;
 
         if(key instanceof Array) {
             let result: any = {},

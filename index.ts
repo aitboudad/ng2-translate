@@ -1,14 +1,14 @@
 import {NgModule, ModuleWithProviders} from "@angular/core";
 import {Http, HttpModule} from "@angular/http";
 import {TranslatePipe} from "./src/translate.pipe";
-import {TranslateParser, DefaultTranslateParser} from "./src/translate.parser";
+import {TranslateParser, DefaultTranslateParser, MessageFormatParser} from "./src/translate.parser";
 import {TranslateService, TranslateLoader, TranslateStaticLoader} from "./src/translate.service";
-import {TranslateDirective} from "./src/translate.directive";
+import {TranslateDirective} from "./src/translate.component";
 
 export * from "./src/translate.pipe";
 export * from "./src/translate.service";
 export * from "./src/translate.parser";
-export * from "./src/translate.directive";
+export * from "./src/translate.component";
 
 export function translateLoaderFactory(http: Http) {
     return new TranslateStaticLoader(http);
@@ -37,7 +37,7 @@ export class TranslateModule {
             providers: [
                 providedLoader,
                 TranslateService,
-                { provide: TranslateParser, useClass: DefaultTranslateParser }
+                { provide: TranslateParser, useClass: MessageFormatParser },
             ]
         };
     }

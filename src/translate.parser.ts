@@ -54,3 +54,26 @@ export class DefaultTranslateParser extends TranslateParser {
         return target;
     }
 }
+
+const MessageFormat = require('messageformat');
+
+@Injectable()
+export class MessageFormatParser extends DefaultTranslateParser {
+    messageFormat: any;
+
+    interpolate(expr: string, params?: any): string {
+        if(typeof expr !== 'string' || !params) {
+            return expr;
+        }
+
+        if (params.parser === 'messageformat') {
+            if (!this.messageFormat) {
+                this.messageFormat = new MessageFormat(params.currentLang);
+            }
+
+            return this.messageFormat.compile(expr)(params);
+        }
+
+        return super.interpolate(expr, params);
+    }
+}
