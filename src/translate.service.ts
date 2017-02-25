@@ -85,11 +85,6 @@ export class TranslateStaticLoader implements TranslateLoader {
 @Injectable()
 export class TranslateService {
     /**
-     * The lang currently used
-     */
-    public currentLang: string = this.defaultLang;
-
-    /**
      * An EventEmitter to listen to translation change events
      * onTranslationChange.subscribe((params: TranslationChangeEvent) => {
      *     // do something
@@ -111,6 +106,11 @@ export class TranslateService {
     private translations: any = {};
     private defaultLang: string;
     private langs: Array<string> = [];
+
+    /**
+     * The lang currently used
+     */
+    public currentLang: string = this.defaultLang;
 
     /**
      *

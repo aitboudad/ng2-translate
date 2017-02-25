@@ -16,7 +16,7 @@ import {
   TranslateService,
   TranslationChangeEvent
 } from './translate.service';
-import { DomAdapter, getDOM } from '@angular/platform-browser/src/dom/dom_adapter';
+import { ɵDomAdapter as DomAdapter, ɵgetDOM as getDOM } from '@angular/platform-browser';
 
 @Directive({
   selector: '[translate]'
